@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "Ultralims",
+			"path": "../../../../.."
+		},
+		{
+			"name": "backend_ultralims",
+			"path": "C:/xampp/htdocs/backend_ultralims"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Ultralims"
+	}
+}
