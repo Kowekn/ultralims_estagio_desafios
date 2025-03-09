@@ -84,9 +84,10 @@ export const VerificaInput = (e, setValue, index , Value) => {
     setTimeout(async function faz() {
       Value = e.target.value
       var reg = new RegExp('^[0-9]+$');
+      var reg2 = new RegExp("[0-9]{5}[-]{1}[0-9]{3}")
     if(( Value.length == 8 && reg.test(Value))){
     let cep_pivo = Value.replace(/[^0-9]/, "");
-
+      alert(cep_pivo)
     if(Value.length == 8 && Value.search(/[^0-9]/)){
     let parte1 = Value.substring(0,5)
     let parte2 = Value.substring(5)
@@ -95,13 +96,18 @@ export const VerificaInput = (e, setValue, index , Value) => {
 
      
       cep = cep_pivo
-    
-    
-    
-
       
+   }
+  else if(Value.length == 9 && reg2.test(Value)){
+    let part1 = Value.substring(0,5)
+    let part2 = Value.substring(6)
+    cep = parseInt(part1 + part2)
+    
+  }
+//89204-415
 
-  }},180)
+
+},180)
 
    
       
