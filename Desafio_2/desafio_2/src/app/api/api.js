@@ -4,7 +4,7 @@ import { ordem, bool } from "../tabela";
 
 export function delete_row(id, cep){
 
-    try{const resp =  fetch('http://localhost/backend_ultralims/?req=del', {
+    const resp =  fetch('http://localhost/backend_ultralims/?req=del', {
     
     method: 'POST',
      
@@ -13,32 +13,37 @@ export function delete_row(id, cep){
   },
     body: JSON.stringify(cep),
   })
-  .then(response => response.json().then(data=> 
+  .then(response =>
+    response.json().then(data=> 
     
-    alert(data)
+    alert(data))
+  
+
    
-))
+)
+  .catch((error) => {
+    alert("Problema na conexão com banco de dados")
+    return -1;
+  })
   document.getElementById(id).remove()
 
 }
 
  
 
-  catch{
-
-
-  }
+  
   
     
     
-}
+
 
 
 
 export  default  function Fetch_all({ordem, campo}){
   console.log("" + ordem)
   console.log("" , campo)
-  const resp = fetch('http://localhost/backend_ultralims/?' + new URLSearchParams({
+  
+    const resp = fetch('http://localhost/backend_ultralims/?' + new URLSearchParams({
     ordem: ordem,
     campo: campo
   }).toString(), {
@@ -48,6 +53,10 @@ export  default  function Fetch_all({ordem, campo}){
   })
   .then(response => response.json())
   .then(data =>  data)
+  .catch((error)=>{
+    
+    
+  })
 
  
   
@@ -57,6 +66,8 @@ export  default  function Fetch_all({ordem, campo}){
   return (<Suspense fallback={<tr><td>Loading...</td></tr>} >
       <Ceps ceps={resp}></Ceps>
     </Suspense>)
+  
+  
    } 
   
 
@@ -72,7 +83,8 @@ export const VerificaInput = (e, setValue, index , Value) => {
 
     setTimeout(async function faz() {
       Value = e.target.value
-    if((Value.length == 9 || Value.length == 8)){
+      var reg = new RegExp('^[0-9]+$');
+    if(( Value.length == 8 && reg.test(Value))){
     let cep_pivo = Value.replace(/[^0-9]/, "");
 
     if(Value.length == 8 && Value.search(/[^0-9]/)){
@@ -89,7 +101,7 @@ export const VerificaInput = (e, setValue, index , Value) => {
 
       
 
-  }},500)
+  }},180)
 
    
       
@@ -111,22 +123,38 @@ export const VerificaInput = (e, setValue, index , Value) => {
     
  export async function manda(){
     if(cep.length < 8 ){
-      alert(cep)
+      alert("CEP inválido")
     }else{
-    await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      
+        await fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then(response => {
         if(response.ok){
-          alert('cep válido, enviando...')
+          alert('enviando...')
           response.json().then(
-            data =>  insert(data)
-          )
-           
+            data =>  {
+              
+              
+              if(JSON.stringify(data) == '{"erro":"true"}'){
+                alert("CEP inválido ")
+              }else{
+                insert(data)
 
-        }else{
-            alert('cep inválido')
-        }
+              }
             
-      })
+              }
+          )
+           }else{
+            alert('CEP inválido')
+        } })
+        .catch((error) =>{
+          alert("API ViaCep não responde")
+        })
+      
+    
+
+        
+            
+     
         
        
         
@@ -134,24 +162,12 @@ export const VerificaInput = (e, setValue, index , Value) => {
       }}
 
 
-export function select_ordem(e){
-    switch (e) {
-        case 0:
-          statements
-        case 1:
-          statements
-        // …
-        case 2:
-          statements
-        default:
-            alert('Nenhuma Ordem selecionada')
-          break;
-      }
-}
+
 
 async function insert(dados){
   
-  const resp = await fetch('http://localhost/backend_ultralims/?req=ins', {
+  
+    const resp = await fetch('http://localhost/backend_ultralims/?req=ins', {
     
     method: 'POST',
      
@@ -161,6 +177,10 @@ async function insert(dados){
     body: JSON.stringify(dados),
   })
   .then(response => response.json().then(data=> alert(data)))
+  .catch((error) => {
+    alert("Problema na conexão com banco de dados")
+  })
+  
   
   
 

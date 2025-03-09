@@ -5,8 +5,8 @@ import { delete_row } from "./api"
 export function Ceps({ ceps }){
   const cep = use(ceps)
   const css= `border-2 px-2 border-slate-100/20`
-  
-  return (cep.map(e => (
+  try {
+    return (cep.map(e => (
   
   
     <tr id={e.id}>
@@ -16,4 +16,8 @@ export function Ceps({ ceps }){
       <button type="button" className="p-2 cursor-pointer " onClick={()=> delete_row(e.id, e.cep)}>X</button>
   </tr>
   )))
+  } catch (error) {
+    return <tr><td>Sem conexão com banco de dados</td></tr>
+  }
+  
 }
