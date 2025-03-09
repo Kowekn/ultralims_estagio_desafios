@@ -29,20 +29,20 @@ public class Fibonacci {
         
     }
 
-    public static void main(String args[]){
-        Fibonacci obj = new Fibonacci(); //acho que nesse caso nao precisava encapsular, mas se vou usar java vou do jeito java
-        int input = 0;
+    // public static void main(String args[]){
+    //     Fibonacci obj = new Fibonacci(); //acho que nesse caso nao precisava encapsular, mas se vou usar java vou do jeito java
+    //     int input = 0;
         
-        System.out.print("\nDigite quantos números de Fibonacci gostaria de ver:  ");
+    //     System.out.print("\nDigite quantos números de Fibonacci gostaria de ver:  ");
 
-        Scanner scanIn = new Scanner(System.in);  //scanner me parece mais simples 
+    //     Scanner scanIn = new Scanner(System.in);  //scanner me parece mais simples 
       
-        input = scanIn.nextInt();
-        scanIn.close();  
+    //     input = scanIn.nextInt();    
+    //     scanIn.close();  
 
-        obj.Fib(input); //chamando a funcao com o valor do cliente
+    //     obj.Fib(input); //chamando a funcao com o valor do cliente
         
         
         
     }
-}
+
