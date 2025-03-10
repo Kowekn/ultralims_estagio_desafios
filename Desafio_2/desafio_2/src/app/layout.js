@@ -15,8 +15,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {  //RootLayout é tipo app  app.mount() 
-  return (                                        
-    <html lang="en">                                               
+  return (
+    <html lang="en">
       <body
         className={`  ${poppins.variable} font-normal antialiased`}
       >

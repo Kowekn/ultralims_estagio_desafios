@@ -15,7 +15,7 @@ export default function Home() {
 
         <div className="justify-items-center">
           <h1>Bem vindo</h1>
-          
+
           <Cliente></Cliente>
 
 
@@ -24,7 +24,7 @@ export default function Home() {
 
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-       
+
       </footer>
     </div>
   );
